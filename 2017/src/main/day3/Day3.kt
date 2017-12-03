@@ -28,7 +28,7 @@ class Day3(private val number: Int) {
 
     /**
      * The grid of numbers around 1 have x/y axis out from 2,4,6,8. The ring containing the number in question has
-     * a corresponding axis number. The closes distance to the axis is the 'over' number
+     * a corresponding axis number. The closest distance to the axis is the 'over' number
      */
     fun over(out: Int): Int {
         if (number == 1) { return 0 }
@@ -44,10 +44,67 @@ class Day3(private val number: Int) {
         return axises.map { a -> (a - number).absoluteValue }
                 .min()!!
     }
+
+    fun solve2(): Int {
+        val grid = mutableMapOf<Pair<Int, Int>, Int>()
+        var lastPair = Pair(0,0)
+        var lastVal = 1
+        grid.put(lastPair, lastVal)
+        while(lastVal <= number) {
+            lastPair = nextPair(lastPair)
+            var x = lastPair.first
+            var y = lastPair.second
+            var sum = 0
+            sum += grid.getOrDefault(Pair(x, y - 1), 0)
+            sum += grid.getOrDefault(Pair(x, y + 1), 0)
+            sum += grid.getOrDefault(Pair(x - 1, y), 0)
+            sum += grid.getOrDefault(Pair(x - 1, y - 1), 0)
+            sum += grid.getOrDefault(Pair(x - 1, y + 1), 0)
+            sum += grid.getOrDefault(Pair(x + 1, y), 0)
+            sum += grid.getOrDefault(Pair(x + 1, y - 1), 0)
+            sum += grid.getOrDefault(Pair(x + 1, y + 1), 0)
+            lastVal = sum
+            grid.put(lastPair, lastVal)
+        }
+        return lastVal
+    }
+
+    fun nextPair(lastPair: Pair<Int, Int>): Pair<Int, Int> {
+
+        if (lastPair.first == 0 && lastPair.second == 0) {
+            return Pair(lastPair.first + 1, lastPair.second)
+        }
+
+        if (lastPair.first.absoluteValue == lastPair.second.absoluteValue) {
+            if (lastPair.first < 0) {
+                if (lastPair.second < 0) {
+                    return Pair(lastPair.first + 1, lastPair.second)
+                }
+                return Pair(lastPair.first, lastPair.second - 1)
+            }
+            if (lastPair.second < 0) {
+                return Pair(lastPair.first + 1, lastPair.second)
+            }
+            return Pair(lastPair.first - 1, lastPair.second)
+        }
+
+        if (lastPair.first.absoluteValue > lastPair.second.absoluteValue) {
+            if (lastPair.first < 0) {
+                return Pair(lastPair.first, lastPair.second - 1)
+            }
+            return Pair(lastPair.first, lastPair.second + 1)
+        }
+        if (lastPair.second < 0) {
+            return Pair(lastPair.first + 1, lastPair.second)
+        }
+        return Pair(lastPair.first - 1, lastPair.second)
+
+    }
 }
 
 fun main(args: Array<String>) {
     val inputNumber = 347991
     val solver = Day3(inputNumber)
     println("Distance: ${solver.solve1()}")
+    println("Greater than target: ${solver.solve2()}")
 }
