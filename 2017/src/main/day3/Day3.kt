@@ -13,7 +13,7 @@ class Day3(private val number: Int) {
      * As numbers spiral out they form a ring around the number 1. The count of numbers in that ring is a multiple of 8.
      * The multiple represents the distance out from the number 1 the ring is.
      */
-    fun out(): Int {
+    private fun out(): Int {
         if (number == 1) { return 0 }
         var minCircle = 2
         for (i in 1..number) {
@@ -30,15 +30,15 @@ class Day3(private val number: Int) {
      * The grid of numbers around 1 have x/y axis out from 2,4,6,8. The ring containing the number in question has
      * a corresponding axis number. The closest distance to the axis is the 'over' number
      */
-    fun over(out: Int): Int {
+    private fun over(out: Int): Int {
         if (number == 1) { return 0 }
-        var axises = arrayOf(2, 4, 6, 8)
-        var step = arrayOf(1, 3, 5, 7)
+        val axises = arrayOf(2, 4, 6, 8)
+        val step = arrayOf(1, 3, 5, 7)
         (1 until out).forEach { i ->
             (0..3).forEach { j ->
-                var a = axises[j]
-                var newA = a + (step[j] + i * 8)
-                axises.set(j, newA)
+                val a = axises[j]
+                val newA = a + (step[j] + i * 8)
+                axises[j] = newA
             }
         }
         return axises.map { a -> (a - number).absoluteValue }
@@ -52,8 +52,8 @@ class Day3(private val number: Int) {
         grid.put(lastPair, lastVal)
         while(lastVal <= number) {
             lastPair = nextPair(lastPair)
-            var x = lastPair.first
-            var y = lastPair.second
+            val x = lastPair.first
+            val y = lastPair.second
             var sum = 0
             sum += grid.getOrDefault(Pair(x, y - 1), 0)
             sum += grid.getOrDefault(Pair(x, y + 1), 0)

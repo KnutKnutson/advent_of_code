@@ -16,11 +16,11 @@ class Day4(private val passPhrasFile: String) {
     private fun isValid(passPhrase: String): Boolean {
         val passPhrases = mutableSetOf<String>()
         passPhrase.split(" ")
-                .forEach{ passPhrase ->
-                    if (passPhrases.contains(passPhrase)) {
+                .forEach{ phrase ->
+                    if (passPhrases.contains(phrase)) {
                         return false
                     }
-                    passPhrases.add(passPhrase)
+                    passPhrases.add(phrase)
                 }
         return true
     }
@@ -38,8 +38,8 @@ class Day4(private val passPhrasFile: String) {
     private fun isNotAnAnagram(passPhrase: String): Boolean {
         val sortedPassPhrases = mutableSetOf<String>()
         passPhrase.split(" ")
-                .forEach{ passPhrase ->
-                    val sortedPhrase = passPhrase.toCharArray().sortedArray().contentToString()
+                .forEach{ phrase ->
+                    val sortedPhrase = phrase.toCharArray().sortedArray().contentToString()
                     if (sortedPassPhrases.contains(sortedPhrase)) {
                         return false
                     }
