@@ -14,15 +14,11 @@ class Day5(private val instructionsFile: String)  {
         var currentInstruction = 0
         var steps = 0
         while (true) {
-            var jumpTo = maze.getOrNull(currentInstruction)
-            if (jumpTo == null) {
-                return steps
-            }
+            val jumpTo = maze.getOrNull(currentInstruction) ?: return steps
             maze[currentInstruction] = jumpTo + 1
             currentInstruction += jumpTo
             steps++
         }
-        return steps
     }
 
     fun solve2(): Int {
@@ -35,15 +31,11 @@ class Day5(private val instructionsFile: String)  {
         var currentInstruction = 0
         var steps = 0
         while (true) {
-            var jumpTo = maze.getOrNull(currentInstruction)
-            if (jumpTo == null) {
-                return steps
-            }
+            val jumpTo = maze.getOrNull(currentInstruction) ?: return steps
             maze[currentInstruction] = if (jumpTo < 3) (jumpTo + 1) else (jumpTo - 1)
             currentInstruction += jumpTo
             steps++
         }
-        return steps
     }
 }
 
