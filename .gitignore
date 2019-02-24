@@ -2,5 +2,6 @@
 /target/
 .settings
 .DS_Store
+.gradle
 .idea
 *.iml
