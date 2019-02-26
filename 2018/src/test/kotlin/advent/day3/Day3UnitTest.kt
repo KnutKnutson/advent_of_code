@@ -21,16 +21,16 @@ class Day3UnitTest {
 
   @Test
   fun `solve2 -- test file 2 -- returns expected value`() {
-    val result = day().solve2("day3/test2.txt")
+    val result = day().solve2("day3/test1.txt")
 
-    assertThat(result).isEqualTo("fgij")
+    assertThat(result).isEqualTo("#3")
   }
 
   @Test
   fun `solve2 -- input -- returns expected value`() {
     val result = day().solve2("day3/input.txt")
 
-    assertThat(result).isEqualTo("qyzphxoiseldjrntfygvdmanu")
+    assertThat(result).isEqualTo("#266")
   }
 
   private fun day(size: Pair<Int, Int> = 1_000 to 1_000): Day3 {

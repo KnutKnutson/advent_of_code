@@ -20,6 +20,13 @@ class Day3(private val size: Pair<Int, Int>): Day<Int, String?>() {
   }
 
   override fun solve2(inputResource: String): String? {
+    val claims = resourceContents(inputResource).lines().map { stringToClaim(it) }
+    addClaimsToFabric(claims)
+    claims.forEach { claim ->
+      val claimArea = claim.size.first * claim.size.second
+      val unsharedClaimFabric = fabric.entries.filter { it.value.size == 1 && it.value.contains(claim) }.count()
+      if (claimArea == unsharedClaimFabric) return claim.id
+    }
     return null
   }
 
