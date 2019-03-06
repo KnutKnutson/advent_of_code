@@ -1,39 +1,40 @@
-package advent.day3
+package advent.day4
 
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 
-class Day3UnitTest {
+internal class Day4UnitTest {
+  private val day = "day4"
 
   @Test
   fun `solve1 -- test 1 -- returns expected value`() {
-    val result = day(8 to 8).solve1("day3/test1.txt")
+    val result = day().solve1("$day/test1.txt")
 
     assertThat(result).isEqualTo(4)
   }
 
   @Test
   fun `solve1 -- input -- returns expected value`() {
-    val result = day().solve1("day3/input.txt")
+    val result = day().solve1("$day/input.txt")
 
     assertThat(result).isEqualTo(111266)
   }
 
   @Test
   fun `solve2 -- test file 2 -- returns expected value`() {
-    val result = day(8 to 8).solve2("day3/test1.txt")
+    val result = day().solve2("$day/test1.txt")
 
     assertThat(result).isEqualTo("#3")
   }
 
   @Test
   fun `solve2 -- input -- returns expected value`() {
-    val result = day().solve2("day3/input.txt")
+    val result = day().solve2("$day/input.txt")
 
     assertThat(result).isEqualTo("#266")
   }
 
-  private fun day(size: Pair<Int, Int> = 1_000 to 1_000): Day3 {
-    return Day3(size)
+  private fun day(): Day4 {
+    return Day4()
   }
 }
