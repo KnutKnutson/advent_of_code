@@ -1,2 +1,2 @@
 rootProject.name = "advent-of-code"
-include("2018")
+include("2017", "2018")

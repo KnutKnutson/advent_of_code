@@ -2,7 +2,7 @@ import org.jetbrains.kotlin.gradle.plugin.KotlinSourceSet
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
-  id("org.jetbrains.kotlin.jvm").version("1.3.30")
+  id("org.jetbrains.kotlin.jvm").version("1.3.61")
   id("com.adarshr.test-logger").version("1.6.0")
   application
 }
@@ -21,8 +21,8 @@ allprojects {
   }
 
   java {
-    sourceCompatibility = JavaVersion.VERSION_1_8
-    targetCompatibility = JavaVersion.VERSION_1_8
+    sourceCompatibility = JavaVersion.VERSION_11
+    targetCompatibility = JavaVersion.VERSION_11
   }
 
   sourceSets.create("systemTest") {
