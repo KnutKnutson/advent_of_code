@@ -2,9 +2,8 @@ import org.jetbrains.kotlin.gradle.plugin.KotlinSourceSet
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
-  id("org.jetbrains.kotlin.jvm").version("1.3.61")
-  id("com.adarshr.test-logger").version("1.6.0")
-  application
+  kotlin("jvm") version "1.4.20"
+  id("com.adarshr.test-logger").version("2.0.0")
 }
 
 allprojects {
@@ -52,29 +51,33 @@ allprojects {
 
     withType(KotlinCompile::class.java).all {
       kotlinOptions {
-        jvmTarget = JavaVersion.VERSION_1_8.toString()
+        jvmTarget = JavaVersion.VERSION_11.toString()
       }
     }
   }
 
   dependencies {
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.0")
-    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
-    implementation("org.jetbrains.kotlin:kotlin-reflect")
+    implementation(platform(kotlin("bom")))
+    implementation(kotlin("stdlib-jdk8"))
+    implementation(kotlin("reflect"))
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.4.1")
 
     // Logging
     implementation("org.apache.logging.log4j:log4j-core:2.10.0")
     implementation("org.apache.logging.log4j:log4j-api:2.10.0")
 
-    testImplementation("org.assertj:assertj-core:3.11.1")
+    testImplementation("org.assertj:assertj-core:3.15.0")
 
-    testImplementation("org.mockito:mockito-core:2.23.4")
-    testImplementation("org.mockito:mockito-junit-jupiter:2.23.4")
-    testImplementation("org.mockito:mockito-inline:2.23.4")
-    testImplementation("com.nhaarman.mockitokotlin2:mockito-kotlin:2.0.0")
+    // mockito
+    testImplementation("org.mockito:mockito-core:2.28.2")
+    testImplementation("org.mockito:mockito-inline:2.28.2")
+    testImplementation("com.nhaarman.mockitokotlin2:mockito-kotlin:2.2.0")
 
-    testImplementation("org.junit.jupiter:junit-jupiter-api:5.3.2")
-    testImplementation("org.junit.jupiter:junit-jupiter-engine:5.3.2")
-    testImplementation("org.junit.jupiter:junit-jupiter-params:5.3.2")
+    // junit
+    testImplementation("org.junit.jupiter:junit-jupiter-api:5.6.0")
+    testImplementation("org.junit.jupiter:junit-jupiter-engine:5.6.0")
+    testImplementation("org.junit.jupiter:junit-jupiter-params:5.6.0")
   }
 }
+
+
