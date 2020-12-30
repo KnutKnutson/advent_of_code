@@ -1,6 +1,6 @@
-package com.knutknut.advent.twenty
+package com.knutknut.advent.twenty.day1
 
-import com.knutknut.advent.twenty.day1.Day1
+import com.knutknut.advent.twenty.TestUtil
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 
@@ -23,6 +23,6 @@ class Day1UnitTest {
 
     val day1 = Day1().solve2(expenseReport)
 
-    assertThat(day1).isEqualTo(703131)
+    assertThat(day1).isEqualTo(272423970L)
   }
 }
