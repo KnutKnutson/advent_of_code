@@ -1,8 +1,10 @@
+import org.gradle.api.plugins.JavaPlugin.TEST_IMPLEMENTATION_CONFIGURATION_NAME
+import org.gradle.api.plugins.JavaPlugin.TEST_RUNTIME_CLASSPATH_CONFIGURATION_NAME
 import org.jetbrains.kotlin.gradle.plugin.KotlinSourceSet
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
-  kotlin("jvm") version "1.4.20"
+  kotlin("jvm") version "1.7.20"
   id("com.adarshr.test-logger").version("2.0.0")
 }
 
@@ -16,7 +18,7 @@ allprojects {
 
   repositories {
     mavenLocal()
-    jcenter()
+    mavenCentral()
   }
 
   java {
@@ -32,8 +34,8 @@ allprojects {
   }
 
   configurations {
-    getByName("systemTestImplementation").extendsFrom(testImplementation.get())
-    getByName("systemTestRuntime").extendsFrom(testRuntime.get())
+    getByName("systemTestImplementation").extendsFrom(configurations.getByName(TEST_IMPLEMENTATION_CONFIGURATION_NAME))
+    getByName("systemTestRuntimeOnly").extendsFrom(configurations.getByName(TEST_RUNTIME_CLASSPATH_CONFIGURATION_NAME))
   }
 
   tasks {
@@ -58,25 +60,27 @@ allprojects {
 
   dependencies {
     implementation(platform(kotlin("bom")))
-    implementation(kotlin("stdlib-jdk8"))
     implementation(kotlin("reflect"))
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.4.1")
+//    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core")
 
     // Logging
-    implementation("org.apache.logging.log4j:log4j-core:2.10.0")
-    implementation("org.apache.logging.log4j:log4j-api:2.10.0")
+    val log4jVersion = "2.17.2"
+    implementation("org.apache.logging.log4j:log4j-core:$log4jVersion")
+    implementation("org.apache.logging.log4j:log4j-api:$log4jVersion")
 
     testImplementation("org.assertj:assertj-core:3.15.0")
 
     // mockito
-    testImplementation("org.mockito:mockito-core:2.28.2")
-    testImplementation("org.mockito:mockito-inline:2.28.2")
-    testImplementation("com.nhaarman.mockitokotlin2:mockito-kotlin:2.2.0")
+    val mockitoVersion = "4.4.0"
+    testImplementation("org.mockito:mockito-core:$mockitoVersion")
+    testImplementation("org.mockito:mockito-inline:$mockitoVersion")
+    testImplementation("org.mockito.kotlin:mockito-kotlin:4.1.0")
 
     // junit
-    testImplementation("org.junit.jupiter:junit-jupiter-api:5.6.0")
-    testImplementation("org.junit.jupiter:junit-jupiter-engine:5.6.0")
-    testImplementation("org.junit.jupiter:junit-jupiter-params:5.6.0")
+    val junitVersion = "5.8.2"
+    testImplementation("org.junit.jupiter:junit-jupiter-api:$junitVersion")
+    testImplementation("org.junit.jupiter:junit-jupiter-engine:$junitVersion")
+    testImplementation("org.junit.jupiter:junit-jupiter-params:$junitVersion")
   }
 }
 
