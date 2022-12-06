@@ -1,12 +1,11 @@
 package com.knutknut.advent.twenty
 
 import com.google.common.collect.EvictingQueue
-import com.google.common.collect.Queues
 
 class Day6 {
 
   fun solvePart1(input: String): Int {
-    val ringBuffer = Queues.synchronizedQueue(EvictingQueue.create<Char>(4))
+    val ringBuffer = EvictingQueue.create<Char>(4)
     input.forEachIndexed { i, c ->
       ringBuffer.add(c)
       if (ringBuffer.distinct().size == 4) {
@@ -18,7 +17,7 @@ class Day6 {
 
   fun solvePart2(input: String): Int {
     val size = 14
-    val ringBuffer = Queues.synchronizedQueue(EvictingQueue.create<Char>(size))
+    val ringBuffer = EvictingQueue.create<Char>(size)
     input.forEachIndexed { i, c ->
       ringBuffer.add(c)
       if (ringBuffer.distinct().size == size) {
