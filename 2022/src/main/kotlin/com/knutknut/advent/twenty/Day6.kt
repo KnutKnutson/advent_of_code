@@ -9,7 +9,7 @@ class Day6 {
     val ringBuffer = Queues.synchronizedQueue(EvictingQueue.create<Char>(4))
     input.forEachIndexed { i, c ->
       ringBuffer.add(c)
-      if (ringBuffer.size == 4 && ringBuffer.distinct().size == 4) {
+      if (ringBuffer.distinct().size == 4) {
         return i + 1
       }
     }
@@ -21,7 +21,7 @@ class Day6 {
     val ringBuffer = Queues.synchronizedQueue(EvictingQueue.create<Char>(size))
     input.forEachIndexed { i, c ->
       ringBuffer.add(c)
-      if (ringBuffer.size == size && ringBuffer.distinct().size == size) {
+      if (ringBuffer.distinct().size == size) {
         return i + 1
       }
     }
