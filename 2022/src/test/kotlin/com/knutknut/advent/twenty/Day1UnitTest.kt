@@ -1,5 +1,6 @@
 package com.knutknut.advent.twenty
 
+import com.knutknut.advent.twenty.util.OtherUtil
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 
@@ -7,6 +8,7 @@ class Day1UnitTest {
   @Test
   fun `solvePart1 -- example input -- returns 24000`() {
     val input = TestUtil.loadResource("day1-part1-example.txt")
+    OtherUtil.tryIt()
 
     val day1 = Day1().solvePart1(input)
 

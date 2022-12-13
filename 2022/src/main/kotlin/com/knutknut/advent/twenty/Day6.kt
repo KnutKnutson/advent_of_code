@@ -5,18 +5,14 @@ import com.google.common.collect.EvictingQueue
 class Day6 {
 
   fun solvePart1(input: String): Int {
-    val ringBuffer = EvictingQueue.create<Char>(4)
-    input.forEachIndexed { i, c ->
-      ringBuffer.add(c)
-      if (ringBuffer.distinct().size == 4) {
-        return i + 1
-      }
-    }
-    throw Exception("no marker found")
+    return solve(4, input)
   }
 
   fun solvePart2(input: String): Int {
-    val size = 14
+    return solve(14, input)
+  }
+
+  private fun solve(size: Int, input: String): Int {
     val ringBuffer = EvictingQueue.create<Char>(size)
     input.forEachIndexed { i, c ->
       ringBuffer.add(c)
